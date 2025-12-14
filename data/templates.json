@@ -1,0 +1,46 @@
+{
+  "templates": [
+    {
+      "id": "1",
+      "name": "Code Review",
+      "description": "Get detailed code review feedback",
+      "prompt": "Review the following code and provide detailed feedback on:\n\n1. Performance optimizations\n2. Security vulnerabilities\n3. Code readability and maintainability\n4. Best practices and design patterns\n5. Potential bugs or edge cases\n\n[PASTE YOUR CODE HERE]",
+      "createdAt": "2024-01-15T10:00:00Z"
+    },
+    {
+      "id": "2",
+      "name": "Explain Concept",
+      "description": "Get clear explanations with examples",
+      "prompt": "Explain the concept of [TOPIC] in simple terms.\n\nPlease include:\n- A clear definition\n- Real-world analogies\n- Practical examples\n- Common use cases\n- Related concepts",
+      "createdAt": "2024-01-15T10:30:00Z"
+    },
+    {
+      "id": "3",
+      "name": "Brainstorm Ideas",
+      "description": "Generate creative ideas for any topic",
+      "prompt": "Generate 10 creative and innovative ideas for [TOPIC].\n\nFor each idea:\n1. Provide a catchy title\n2. Write a brief description (2-3 sentences)\n3. Explain the potential impact\n4. List key implementation steps\n5. Identify potential challenges",
+      "createdAt": "2024-01-15T11:00:00Z"
+    },
+    {
+      "id": "4",
+      "name": "Debug Assistant",
+      "description": "Get help debugging issues",
+      "prompt": "I'm experiencing the following issue:\n\nError Message:\n[PASTE ERROR HERE]\n\nContext:\n- What I was trying to do:\n- What actually happened:\n- Environment (OS, versions, etc.):\n- Steps to reproduce:\n\nCode:\n[PASTE RELEVANT CODE]\n\nPlease help me:\n1. Identify the root cause\n2. Suggest solutions\n3. Explain why this happened\n4. Recommend preventive measures",
+      "createdAt": "2024-01-15T11:30:00Z"
+    },
+    {
+      "id": "5",
+      "name": "Write Documentation",
+      "description": "Generate comprehensive documentation",
+      "prompt": "Create comprehensive documentation for [COMPONENT/FUNCTION/API].\n\nInclude:\n1. Overview and purpose\n2. Installation/setup instructions\n3. API reference with parameters\n4. Usage examples\n5. Common pitfalls and best practices\n6. FAQs\n\n[PROVIDE DETAILS ABOUT WHAT TO DOCUMENT]",
+      "createdAt": "2024-01-15T12:00:00Z"
+    },
+    {
+      "id": "6",
+      "name": "Optimize Performance",
+      "description": "Get performance optimization suggestions",
+      "prompt": "Analyze the following code and suggest performance optimizations:\n\n[PASTE CODE HERE]\n\nContext:\n- Current performance metrics:\n- Bottlenecks observed:\n- Target performance goals:\n\nPlease provide:\n1. Specific optimization recommendations\n2. Expected performance improvements\n3. Trade-offs to consider\n4. Implementation priority",
+      "createdAt": "2024-01-15T12:30:00Z"
+    }
+  ]
+}
