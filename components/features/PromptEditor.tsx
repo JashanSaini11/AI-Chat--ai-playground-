@@ -1,16 +1,15 @@
-'use client';
+"use client";
 
-import React, { useRef } from 'react';
-import { cn } from '@/lib/utils/cn';
-import { Button } from '@/components/ui/Buttons/Button';
-import { Send, Save, Trash2 } from 'lucide-react';
+import React, { useRef } from "react";
+import { cn } from "@/lib/utils/cn";
+import { Button } from "@/components/ui/Buttons/Button";
+import { Send, Save } from "lucide-react";
 
 interface PromptEditorProps {
   value: string;
   onChange: (value: string) => void;
   onSend: () => void;
   onSaveTemplate: () => void;
-  onClear: () => void;
   isLoading?: boolean;
   disabled?: boolean;
   placeholder?: string;
@@ -22,16 +21,15 @@ export const PromptEditor: React.FC<PromptEditorProps> = ({
   onChange,
   onSend,
   onSaveTemplate,
-  onClear,
   isLoading = false,
   disabled = false,
-  placeholder = 'Type your message here... (Shift+Enter for new line)',
+  placeholder = "Type your message here... (Shift+Enter for new line)",
   className,
 }) => {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
+    if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
       if (!isLoading && !disabled && value.trim()) {
         onSend();
@@ -54,7 +52,7 @@ export const PromptEditor: React.FC<PromptEditorProps> = ({
   const characterCount = value.length;
 
   return (
-    <div className={cn('space-y-3', className)}>
+    <div className={cn("space-y-3", className)}>
       {/* Textarea */}
       <div className="relative">
         <textarea
@@ -64,19 +62,19 @@ export const PromptEditor: React.FC<PromptEditorProps> = ({
           onKeyDown={handleKeyDown}
           placeholder={placeholder}
           disabled={disabled || isLoading}
-          className={cn(
-            'w-full px-4 py-3 rounded-lg',
-            'bg-input-background border border-border',
-            'text-foreground placeholder-muted-foreground',
-            'focus:outline-none focus:ring-2 focus:ring-ring',
-            'resize-none',
-            'disabled:opacity-50 disabled:cursor-not-allowed',
-            'transition-colors'
-          )}
           rows={4}
           aria-label="Prompt editor"
+          className={cn(
+            "w-full px-4 py-3 rounded-lg resize-none",
+            "bg-input-background text-foreground",
+            "border border-border dark:border-border",
+           "placeholder:text-foreground/50 dark:placeholder:text-foreground/50",
+            "focus:outline-none focus:ring-2 focus:ring-ring",
+            "disabled:opacity-50 disabled:cursor-not-allowed",
+            "transition-colors"
+          )}
         />
-        
+
         {/* Character counter */}
         <div className="absolute bottom-2 right-2 text-xs text-muted-foreground">
           {characterCount.toLocaleString()} characters
@@ -105,22 +103,19 @@ export const PromptEditor: React.FC<PromptEditorProps> = ({
         >
           Save Template
         </Button>
-
-        <Button
-          onClick={onClear}
-          disabled={disabled}
-          icon={<Trash2 className="w-4 h-4" />}
-          variant="ghost"
-          aria-label="Clear editor"
-        >
-          Clear
-        </Button>
       </div>
 
       {/* Helper text */}
       <p className="text-xs text-muted-foreground">
-        Press <kbd className="px-1.5 py-0.5 rounded bg-muted text-foreground font-mono text-xs">Enter</kbd> to send, 
-        <kbd className="px-1.5 py-0.5 rounded bg-muted text-foreground font-mono text-xs ml-1">Shift+Enter</kbd> for new line
+        Press{" "}
+        <kbd className="px-1.5 py-0.5 rounded bg-muted text-foreground font-mono text-xs">
+          Enter
+        </kbd>{" "}
+        to send,
+        <kbd className="ml-1 px-1.5 py-0.5 rounded bg-muted text-foreground font-mono text-xs">
+          Shift+Enter
+        </kbd>{" "}
+        for new line
       </p>
     </div>
   );

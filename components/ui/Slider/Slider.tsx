@@ -1,5 +1,3 @@
-// components/ui/Slider.tsx
-
 import React from "react";
 import { cn } from "@/lib/utils/cn";
 import { SliderProps } from "@/types";

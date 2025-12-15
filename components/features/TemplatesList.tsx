@@ -1,11 +1,10 @@
+"use client";
 
-'use client';
-
-import React from 'react';
-import { cn } from '@/lib/utils/cn';
-import { Template } from '@/types';
-import { Save, Trash2, FileText } from 'lucide-react';
-import { truncate } from '@/lib/utils/format';
+import React from "react";
+import { cn } from "@/lib/utils/cn";
+import { Template } from "@/types";
+import { Save, Trash2, FileText } from "lucide-react";
+import { truncate } from "@/lib/utils/format";
 
 interface TemplatesListProps {
   templates: Template[];
@@ -24,9 +23,11 @@ export const TemplatesList: React.FC<TemplatesListProps> = ({
 }) => {
   if (isLoading) {
     return (
-      <div className={cn('space-y-2', className)}>
+      <div className={cn("space-y-2", className)}>
         <div className="flex items-center justify-between mb-3">
-          <h4 className="text-sm font-semibold text-muted-foreground">Templates</h4>
+          <h4 className="text-sm font-semibold text-muted-foreground">
+            Templates
+          </h4>
           <Save className="w-4 h-4 text-muted-foreground" />
         </div>
         <div className="space-y-1">
@@ -43,9 +44,11 @@ export const TemplatesList: React.FC<TemplatesListProps> = ({
 
   if (templates.length === 0) {
     return (
-      <div className={cn('space-y-2', className)}>
+      <div className={cn("space-y-2", className)}>
         <div className="flex items-center justify-between mb-3">
-          <h4 className="text-sm font-semibold text-muted-foreground">Templates</h4>
+          <h4 className="text-sm font-semibold text-muted-foreground">
+            Templates
+          </h4>
           <Save className="w-4 h-4 text-muted-foreground" />
         </div>
         <div className="px-3 py-6 text-center border border-dashed border-border rounded-lg">
@@ -60,9 +63,11 @@ export const TemplatesList: React.FC<TemplatesListProps> = ({
   }
 
   return (
-    <div className={cn('space-y-2', className)}>
+    <div className={cn("space-y-2", className)}>
       <div className="flex items-center justify-between mb-3">
-        <h4 className="text-sm font-semibold text-muted-foreground">Templates</h4>
+        <h4 className="text-sm font-semibold text-muted-foreground">
+          Templates
+        </h4>
         <Save className="w-4 h-4 text-muted-foreground" />
       </div>
 
@@ -71,9 +76,9 @@ export const TemplatesList: React.FC<TemplatesListProps> = ({
           <div
             key={template.id}
             className={cn(
-              'group relative px-3 py-2 rounded-md',
-              'hover:bg-sidebar-accent transition-colors',
-              'cursor-pointer'
+              "group relative px-3 py-2 rounded-md",
+              "hover:bg-sidebar-accent transition-colors",
+              "cursor-pointer"
             )}
           >
             <button
@@ -99,9 +104,9 @@ export const TemplatesList: React.FC<TemplatesListProps> = ({
                   }
                 }}
                 className={cn(
-                  'absolute top-2 right-2',
-                  'p-1 rounded hover:bg-destructive/10',
-                  'opacity-0 group-hover:opacity-100 transition-opacity'
+                  "absolute top-2 right-2",
+                  "p-1 rounded hover:bg-destructive/10",
+                  "opacity-0 group-hover:opacity-100 transition-opacity"
                 )}
                 aria-label={`Delete template: ${template.name}`}
               >

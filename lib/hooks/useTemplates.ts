@@ -1,12 +1,11 @@
-
-import { useState, useEffect } from 'react';
-import { Template, UseTemplatesReturn } from '@/types';
-import { mockAPI } from '@/lib/api/mock-api';
+import { useState, useEffect } from "react";
+import { Template, UseTemplatesReturn } from "@/types";
+import { mockAPI } from "@/lib/api/mock-api";
 
 /**
  * Custom hook for managing prompt templates
  * Handles loading, saving, deleting, and loading templatesz
- * 
+ *
  * @param onTemplateLoad - Optional callback when a template is loaded
  */
 export function useTemplates(
@@ -34,11 +33,11 @@ export function useTemplates(
       if (response.success && response.data) {
         setTemplates(response.data);
       } else {
-        setError(response.error || 'Failed to fetch templates');
+        setError(response.error || "Failed to fetch templates");
       }
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'An error occurred');
-      console.error('Error fetching templates:', err);
+      setError(err instanceof Error ? err.message : "An error occurred");
+      console.error("Error fetching templates:", err);
     } finally {
       setIsLoading(false);
     }
@@ -49,7 +48,7 @@ export function useTemplates(
    */
   const saveTemplate = async (name: string, prompt: string) => {
     if (!name.trim() || !prompt.trim()) {
-      throw new Error('Name and prompt are required');
+      throw new Error("Name and prompt are required");
     }
 
     setIsLoading(true);
@@ -59,14 +58,14 @@ export function useTemplates(
       const response = await mockAPI.saveTemplate(name, prompt);
 
       if (response.success && response.data) {
-        setTemplates(prev => [...prev, response.data!]);
+        setTemplates((prev) => [...prev, response.data!]);
       } else {
-        const errorMsg = response.error || 'Failed to save template';
+        const errorMsg = response.error || "Failed to save template";
         setError(errorMsg);
         throw new Error(errorMsg);
       }
     } catch (err) {
-      const errorMsg = err instanceof Error ? err.message : 'An error occurred';
+      const errorMsg = err instanceof Error ? err.message : "An error occurred";
       setError(errorMsg);
       throw err;
     } finally {
@@ -85,14 +84,14 @@ export function useTemplates(
       const response = await mockAPI.deleteTemplate(id);
 
       if (response.success) {
-        setTemplates(prev => prev.filter(t => t.id !== id));
+        setTemplates((prev) => prev.filter((t) => t.id !== id));
       } else {
-        const errorMsg = response.error || 'Failed to delete template';
+        const errorMsg = response.error || "Failed to delete template";
         setError(errorMsg);
         throw new Error(errorMsg);
       }
     } catch (err) {
-      const errorMsg = err instanceof Error ? err.message : 'An error occurred';
+      const errorMsg = err instanceof Error ? err.message : "An error occurred";
       setError(errorMsg);
       throw err;
     } finally {

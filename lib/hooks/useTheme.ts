@@ -1,21 +1,20 @@
-
-import { useState, useEffect } from 'react';
-import { Theme, UseThemeReturn } from '@/types';
+import { useState, useEffect } from "react";
+import { Theme, UseThemeReturn } from "@/types";
 
 /**
  * Custom hook for managing theme (light/dark mode)
  */
 export function useTheme(): UseThemeReturn {
-  const [theme, setThemeState] = useState<Theme>('dark');
+  const [theme, setThemeState] = useState<Theme>("dark");
 
   // Apply theme to document
   useEffect(() => {
     const root = document.documentElement;
-    
-    if (theme === 'dark') {
-      root.classList.add('dark');
+
+    if (theme === "dark") {
+      root.classList.add("dark");
     } else {
-      root.classList.remove('dark');
+      root.classList.remove("dark");
     }
   }, [theme]);
 
@@ -26,7 +25,7 @@ export function useTheme(): UseThemeReturn {
   };
 
   const toggleTheme = () => {
-    setTheme(theme === 'light' ? 'dark' : 'light');
+    setTheme(theme === "light" ? "dark" : "light");
   };
 
   return {

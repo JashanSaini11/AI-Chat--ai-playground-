@@ -1,14 +1,12 @@
-// components/features/ChatArea.tsx
+"use client";
 
-'use client';
-
-import React, { useRef, useEffect } from 'react';
-import { cn } from '@/lib/utils/cn';
-import { ChatBubble } from '@/components/ui/ChatBubble/ChatBubble';
-import { Button } from '@/components/ui/Buttons/Button';
-import { Message } from '@/types';
-import { Download, Trash2, Copy } from 'lucide-react';
-import { copyToClipboard, downloadJSON } from '@/lib/utils/format';
+import React, { useRef, useEffect } from "react";
+import { cn } from "@/lib/utils/cn";
+import { ChatBubble } from "@/components/ui/ChatBubble/ChatBubble";
+import { Button } from "@/components/ui/Buttons/Button";
+import { Message } from "@/types";
+import { Download, Trash2, Copy } from "lucide-react";
+import { copyToClipboard, downloadJSON } from "@/lib/utils/format";
 
 interface ChatAreaProps {
   messages: Message[];
@@ -27,14 +25,14 @@ export const ChatArea: React.FC<ChatAreaProps> = ({
 
   // Auto-scroll to bottom when new messages arrive
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, isLoading]);
 
   const handleCopy = async (content: string) => {
     try {
       await copyToClipboard(content);
     } catch (error) {
-      console.error('Failed to copy:', error);
+      console.error("Failed to copy:", error);
     }
   };
 
@@ -43,7 +41,7 @@ export const ChatArea: React.FC<ChatAreaProps> = ({
   };
 
   return (
-    <div className={cn('flex flex-col h-full', className)}>
+    <div className={cn("flex flex-col h-full", className)}>
       {/* Header */}
       <div className="flex items-center justify-between px-4 py-3 border-b border-border bg-card">
         <h2 className="text-lg font-semibold text-card-foreground">Chat</h2>
@@ -106,15 +104,15 @@ export const ChatArea: React.FC<ChatAreaProps> = ({
                     <div className="flex gap-1">
                       <div
                         className="w-2 h-2 rounded-full bg-muted-foreground animate-bounce"
-                        style={{ animationDelay: '0ms' }}
+                        style={{ animationDelay: "0ms" }}
                       />
                       <div
                         className="w-2 h-2 rounded-full bg-muted-foreground animate-bounce"
-                        style={{ animationDelay: '150ms' }}
+                        style={{ animationDelay: "150ms" }}
                       />
                       <div
                         className="w-2 h-2 rounded-full bg-muted-foreground animate-bounce"
-                        style={{ animationDelay: '300ms' }}
+                        style={{ animationDelay: "300ms" }}
                       />
                     </div>
                   </div>

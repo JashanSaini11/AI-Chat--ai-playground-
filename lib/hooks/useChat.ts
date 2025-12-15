@@ -1,23 +1,18 @@
-
-
-import { useState, useCallback } from 'react';
-import { Message, ModelConfig, UseChatReturn } from '@/types';
-import { mockAPI } from '@/lib/api/mock-api';
+import { useState, useCallback } from "react";
+import { Message, ModelConfig, UseChatReturn } from "@/types";
+import { mockAPI } from "@/lib/api/mock-api";
 
 /**
  * Custom hook for managing chat messages and AI interactions
- * 
+ *
  * @param modelId - The AI model to use
  * @param config - Model configuration parameters
- */ 
-export function useChat(
-  modelId: string,
-  config: ModelConfig
-): UseChatReturn {
+ */
+export function useChat(modelId: string, config: ModelConfig): UseChatReturn {
   const [messages, setMessages] = useState<Message[]>([
     {
-      id: '1',
-      role: 'assistant',
+      id: "1",
+      role: "assistant",
       content: "Hello! I'm your AI assistant. How can I help you today?",
       timestamp: new Date(),
     },
@@ -31,7 +26,7 @@ export function useChat(
   const sendMessage = useCallback(
     async (content: string) => {
       if (!content.trim()) {
-        setError('Message cannot be empty');
+        setError("Message cannot be empty");
         return;
       }
 
@@ -41,12 +36,12 @@ export function useChat(
       // Add user message
       const userMessage: Message = {
         id: Date.now().toString(),
-        role: 'user',
+        role: "user",
         content: content.trim(),
         timestamp: new Date(),
       };
 
-      setMessages(prev => [...prev, userMessage]);
+      setMessages((prev) => [...prev, userMessage]);
 
       try {
         // Send to AI
@@ -56,38 +51,39 @@ export function useChat(
           // Add AI response
           const assistantMessage: Message = {
             id: (Date.now() + 1).toString(),
-            role: 'assistant',
+            role: "assistant",
             content: response.data,
             timestamp: new Date(),
           };
 
-          setMessages(prev => [...prev, assistantMessage]);
+          setMessages((prev) => [...prev, assistantMessage]);
         } else {
-          const errorMsg = response.error || 'Failed to get response';
+          const errorMsg = response.error || "Failed to get response";
           setError(errorMsg);
-          
+
           // Add error message to chat
           const errorMessage: Message = {
             id: (Date.now() + 1).toString(),
-            role: 'assistant',
+            role: "assistant",
             content: `Error: ${errorMsg}`,
             timestamp: new Date(),
           };
-          setMessages(prev => [...prev, errorMessage]);
+          setMessages((prev) => [...prev, errorMessage]);
         }
       } catch (err) {
-        const errorMsg = err instanceof Error ? err.message : 'An error occurred';
+        const errorMsg =
+          err instanceof Error ? err.message : "An error occurred";
         setError(errorMsg);
-        console.error('Error sending message:', err);
+        console.error("Error sending message:", err);
 
         // Add error message to chat
         const errorMessage: Message = {
           id: (Date.now() + 1).toString(),
-          role: 'assistant',
+          role: "assistant",
           content: `Error: ${errorMsg}`,
           timestamp: new Date(),
         };
-        setMessages(prev => [...prev, errorMessage]);
+        setMessages((prev) => [...prev, errorMessage]);
       } finally {
         setIsLoading(false);
       }
@@ -101,8 +97,8 @@ export function useChat(
   const clearMessages = useCallback(() => {
     setMessages([
       {
-        id: '1',
-        role: 'assistant',
+        id: "1",
+        role: "assistant",
         content: "Hello! I'm your AI assistant. How can I help you today?",
         timestamp: new Date(),
       },
@@ -116,19 +112,19 @@ export function useChat(
   const regenerateLastMessage = useCallback(async () => {
     // Find the last user message
     const lastUserMessageIndex = messages
-      .map((m, i) => (m.role === 'user' ? i : -1))
-      .filter(i => i !== -1)
+      .map((m, i) => (m.role === "user" ? i : -1))
+      .filter((i) => i !== -1)
       .pop();
 
     if (lastUserMessageIndex === undefined) {
-      setError('No user message to regenerate');
+      setError("No user message to regenerate");
       return;
     }
 
     const lastUserMessage = messages[lastUserMessageIndex];
 
     // Remove all messages after the last user message
-    setMessages(prev => prev.slice(0, lastUserMessageIndex + 1));
+    setMessages((prev) => prev.slice(0, lastUserMessageIndex + 1));
 
     // Resend the message
     await sendMessage(lastUserMessage.content);

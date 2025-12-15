@@ -1,11 +1,10 @@
+"use client";
 
-'use client';
-
-import React, { useState } from 'react';
-import { cn } from '@/lib/utils/cn';
-import { Slider } from '@/components/ui/Slider/Slider';
-import { ModelConfig } from '@/types';
-import { ChevronDown } from 'lucide-react';
+import React, { useState } from "react";
+import { cn } from "@/lib/utils/cn";
+import { Slider } from "@/components/ui/Slider/Slider";
+import { ModelConfig } from "@/types";
+import { ChevronDown } from "lucide-react";
 
 interface ParametersPanelProps {
   config: ModelConfig;
@@ -28,7 +27,7 @@ export const ParametersPanel: React.FC<ParametersPanelProps> = ({
   };
 
   return (
-    <div className={cn('border border-border rounded-lg bg-card', className)}>
+    <div className={cn("border border-border rounded-lg bg-card", className)}>
       {/* Header */}
       <button
         onClick={() => setIsExpanded(!isExpanded)}
@@ -41,8 +40,8 @@ export const ParametersPanel: React.FC<ParametersPanelProps> = ({
         </h3>
         <ChevronDown
           className={cn(
-            'w-5 h-5 text-muted-foreground transition-transform',
-            isExpanded && 'rotate-180'
+            "w-5 h-5 text-muted-foreground transition-transform",
+            isExpanded && "rotate-180"
           )}
         />
       </button>
@@ -61,13 +60,15 @@ export const ParametersPanel: React.FC<ParametersPanelProps> = ({
               min={0}
               max={2}
               step={0.1}
-              onChange={(value) => handleChange('temperature', value)}
+              onChange={(value) => handleChange("temperature", value)}
               aria-label="Temperature: Controls randomness in responses"
             />
             <p className="text-xs text-muted-foreground mt-1">
-              {config.temperature < 0.5 && 'More focused and deterministic'}
-              {config.temperature >= 0.5 && config.temperature <= 1 && 'Balanced creativity'}
-              {config.temperature > 1 && 'More creative and random'}
+              {config.temperature < 0.5 && "More focused and deterministic"}
+              {config.temperature >= 0.5 &&
+                config.temperature <= 1 &&
+                "Balanced creativity"}
+              {config.temperature > 1 && "More creative and random"}
             </p>
           </div>
 
@@ -79,7 +80,7 @@ export const ParametersPanel: React.FC<ParametersPanelProps> = ({
               min={256}
               max={4096}
               step={256}
-              onChange={(value) => handleChange('maxTokens', value)}
+              onChange={(value) => handleChange("maxTokens", value)}
               aria-label="Max Tokens: Maximum length of response"
             />
             <p className="text-xs text-muted-foreground mt-1">
@@ -95,7 +96,7 @@ export const ParametersPanel: React.FC<ParametersPanelProps> = ({
               min={0}
               max={1}
               step={0.01}
-              onChange={(value) => handleChange('topP', value)}
+              onChange={(value) => handleChange("topP", value)}
               aria-label="Top P: Nucleus sampling parameter"
             />
             <p className="text-xs text-muted-foreground mt-1">
@@ -111,7 +112,7 @@ export const ParametersPanel: React.FC<ParametersPanelProps> = ({
               min={0}
               max={2}
               step={0.1}
-              onChange={(value) => handleChange('frequencyPenalty', value)}
+              onChange={(value) => handleChange("frequencyPenalty", value)}
               aria-label="Frequency Penalty: Reduces repetition"
             />
             <p className="text-xs text-muted-foreground mt-1">
@@ -125,21 +126,23 @@ export const ParametersPanel: React.FC<ParametersPanelProps> = ({
               System Message <span className="text-xs">(Optional)</span>
             </label>
             <textarea
-              value={config.systemMessage || ''}
-              onChange={(e) => onChange({ ...config, systemMessage: e.target.value })}
+              value={config.systemMessage || ""}
+              onChange={(e) =>
+                onChange({ ...config, systemMessage: e.target.value })
+              }
               placeholder="You are a helpful assistant..."
               className={cn(
-                'w-full px-3 py-2 rounded-lg',
-                'bg-input-background border border-border',
-                'text-foreground placeholder-muted-foreground text-sm',
-                'focus:outline-none focus:ring-2 focus:ring-ring',
-                'resize-none'
+                "w-full px-3 py-2 rounded-lg",
+                "bg-input-background border border-border",
+                "text-foreground placeholder-muted-foreground text-sm",
+                "focus:outline-none focus:ring-2 focus:ring-ring",
+                "resize-none"
               )}
               rows={3}
               aria-label="System message to guide AI behavior"
             />
             <p className="text-xs text-muted-foreground mt-1">
-              Guide the AI's behavior and personality
+              Guide the AI&apos;s behavior and personality
             </p>
           </div>
         </div>
