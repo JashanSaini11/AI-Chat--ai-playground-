@@ -60,26 +60,26 @@ export const Sidebar: React.FC<SidebarProps> = ({
       <aside
         className={cn(
           "fixed lg:static inset-y-0 left-0 z-50",
-          "w-64 bg-sidebar border-r border-neutral-800 dark:border-neutral-800",
-          "flex flex-col h-screen overflow-hidden",
+          "w-[280px] bg-sidebar border-r border-sidebar-border",
+          "flex flex-col h-screen",
           "transition-transform duration-300 ease-in-out",
           !isOpen && "-translate-x-full lg:translate-x-0",
           className
         )}
       >
         {/* Header */}
-        <div className="p-4 border-b border-neutral-800 dark:border-neutral-800 flex-shrink-0">
+        <div className="px-4 py-4 border-b border-sidebar-border">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500 to-purple-700 flex items-center justify-center">
-                <span className="text-white text-sm font-bold">AI</span>
+              <div className="w-6 h-6 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+                <span className="text-white text-xs font-bold">AI</span>
               </div>
-              <h2 className="font-semibold text-sidebar-foreground">Settings</h2>
+              <h2 className="font-medium text-sidebar-foreground">Settings</h2>
             </div>
             {onClose && (
               <button
                 onClick={onClose}
-                className="lg:hidden p-2 rounded-lg hover:bg-sidebar-accent transition-colors"
+                className="lg:hidden p-1 hover:bg-sidebar-accent rounded"
                 aria-label="Close sidebar"
               >
                 <X className="w-5 h-5" />
@@ -88,18 +88,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
           </div>
         </div>
 
-        {/* Content - Scrollable with hidden scrollbar */}
-        <div className="flex-1 overflow-y-auto px-4 py-4 space-y-6 scrollbar-hide">
-          <style jsx>{`
-            .scrollbar-hide::-webkit-scrollbar {
-              display: none;
-            }
-            .scrollbar-hide {
-              -ms-overflow-style: none;
-              scrollbar-width: none;
-            }
-          `}</style>
-
+        {/* Content - Scrollable */}
+        <div className="flex-1 overflow-y-auto px-4 py-4 space-y-6">
           {/* Model Selector */}
           <ModelSelector
             selectedModelId={selectedModelId}
@@ -108,7 +98,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
           {/* Parameters */}
           <div className="space-y-4">
-            <h3 className="text-sm font-medium text-sidebar-foreground">
+            <h3 className="text-sm font-semibold text-muted-foreground">
               Parameters
             </h3>
 
@@ -140,23 +130,23 @@ export const Sidebar: React.FC<SidebarProps> = ({
         </div>
 
         {/* Footer - Theme Toggle */}
-        <div className="p-4 border-t border-neutral-800 dark:border-neutral-800 flex-shrink-0">
+        <div className="px-4 py-4 border-t border-sidebar-border">
           <Button
             variant="ghost"
             onClick={onThemeToggle}
             icon={
               theme === "light" ? (
-                <Moon className="w-5 h-5" />
+                <Sun className="w-4 h-4" />
               ) : (
-                <Sun className="w-5 h-5" />
+                <Moon className="w-4 h-4" />
               )
             }
-            className="w-full justify-start gap-3"
+            className="w-full justify-start"
             aria-label={`Switch to ${
               theme === "light" ? "dark" : "light"
             } mode`}
           >
-            {theme === "light" ? "Dark Mode" : "Light Mode"}
+            {theme === "light" ? "Light" : "Dark"} Mode
           </Button>
         </div>
       </aside>

@@ -1,22 +1,24 @@
-"use client";
+// app/page.tsx
 
-import React, { useState } from "react";
-import { MainLayout } from "@/components/layout/MainLayout";
-import { ChatArea } from "@/components/features/ChatArea";
-import { PromptEditor } from "@/components/features/PromptEditor";
-import { Modal } from "@/components/ui/Modal/Modal";
-import { Button } from "@/components/ui/Buttons/Button";
-import { useThemeContext } from "@/components/providers/ThemeProvider";
-import { useTemplates } from "@/lib/hooks/useTemplates";
-import { useChat } from "@/lib/hooks/useChat";
-import { ModelConfig } from "@/types";
+'use client';
+
+import React, { useState } from 'react';
+import { MainLayout } from '@/components/layout/MainLayout';
+import { ChatArea } from '@/components/features/ChatArea';
+import { PromptEditor } from '@/components/features/PromptEditor';
+import { Modal } from '@/components/ui/Modal/Modal';
+import { Button } from '@/components/ui/Buttons/Button';
+import { useThemeContext } from '@/components/providers/ThemeProvider';
+import { useTemplates } from '@/lib/hooks/useTemplates';
+import { useChat } from '@/lib/hooks/useChat';
+import { ModelConfig } from '@/types';
 
 export default function HomePage() {
-  
+  // Theme
   const { theme, toggleTheme } = useThemeContext();
 
   // Model and Config
-  const [selectedModelId, setSelectedModelId] = useState("gpt-3.5");
+  const [selectedModelId, setSelectedModelId] = useState('gpt-3.5');
   const [config, setConfig] = useState<ModelConfig>({
     temperature: 0.7,
     maxTokens: 2048,
@@ -24,8 +26,8 @@ export default function HomePage() {
     frequencyPenalty: 0,
   });
 
-  
-  const [prompt, setPrompt] = useState("");
+  // Prompt
+  const [prompt, setPrompt] = useState('');
 
   // Chat
   const { messages, isLoading, sendMessage, clearMessages } = useChat(
@@ -33,7 +35,10 @@ export default function HomePage() {
     config
   );
 
+  // Start with empty messages for better empty state
+  const displayMessages = messages.filter(m => m.id !== '1'); // Remove default greeting
 
+  // Templates
   const {
     templates,
     isLoading: templatesLoading,
@@ -46,43 +51,41 @@ export default function HomePage() {
 
   // Save Template Modal
   const [isSaveModalOpen, setIsSaveModalOpen] = useState(false);
-  const [templateName, setTemplateName] = useState("");
-  const [saveError, setSaveError] = useState("");
+  const [templateName, setTemplateName] = useState('');
+  const [saveError, setSaveError] = useState('');
 
- 
+  // Handle sending message
   const handleSend = async () => {
     if (!prompt.trim() || isLoading) return;
 
     await sendMessage(prompt);
-    setPrompt("");
+    setPrompt('');
   };
 
-
+  // Handle save template
   const handleSaveTemplate = () => {
     if (!prompt.trim()) {
-      alert("Please enter a prompt first");
+      alert('Please enter a prompt first');
       return;
     }
     setIsSaveModalOpen(true);
-    setTemplateName("");
-    setSaveError("");
+    setTemplateName('');
+    setSaveError('');
   };
 
   const confirmSaveTemplate = async () => {
     if (!templateName.trim()) {
-      setSaveError("Template name is required");
+      setSaveError('Template name is required');
       return;
     }
 
     try {
       await saveTemplate(templateName, prompt);
       setIsSaveModalOpen(false);
-      setTemplateName("");
-      setSaveError("");
+      setTemplateName('');
+      setSaveError('');
     } catch (error) {
-      setSaveError(
-        error instanceof Error ? error.message : "Failed to save template"
-      );
+      setSaveError(error instanceof Error ? error.message : 'Failed to save template');
     }
   };
 
@@ -96,19 +99,19 @@ export default function HomePage() {
     try {
       await deleteTemplate(id);
     } catch (error) {
-      console.error("Failed to delete template:", error);
-      alert("Failed to delete template");
+      console.error('Failed to delete template:', error);
+      alert('Failed to delete template');
     }
   };
 
   // Get model name for header
   const getModelName = () => {
     const modelNames: Record<string, string> = {
-      "gpt-3.5": "GPT-3.5",
-      "gpt-4": "GPT-4",
-      "claude-3-sonnet": "Claude 3 Sonnet",
-      "claude-3-opus": "Claude 3 Opus",
-      "custom-model": "Custom Model",
+      'gpt-3.5': 'GPT-3.5',
+      'gpt-4': 'GPT-4',
+      'claude-3-sonnet': 'Claude 3 Sonnet',
+      'claude-3-opus': 'Claude 3 Opus',
+      'custom-model': 'Custom Model',
     };
     return modelNames[selectedModelId] || selectedModelId;
   };
@@ -131,7 +134,7 @@ export default function HomePage() {
           {/* Chat Area - Takes most of the space */}
           <div className="flex-1 overflow-hidden">
             <ChatArea
-              messages={messages}
+              messages={displayMessages}
               isLoading={isLoading}
               onClear={clearMessages}
             />
@@ -145,7 +148,7 @@ export default function HomePage() {
                 onChange={setPrompt}
                 onSend={handleSend}
                 onSaveTemplate={handleSaveTemplate}
-                onClear={() => setPrompt("")}
+                onClear={() => setPrompt('')}
                 isLoading={isLoading}
               />
             </div>
@@ -158,8 +161,8 @@ export default function HomePage() {
         isOpen={isSaveModalOpen}
         onClose={() => {
           setIsSaveModalOpen(false);
-          setTemplateName("");
-          setSaveError("");
+          setTemplateName('');
+          setSaveError('');
         }}
         title="Save Prompt Template"
         footer={
@@ -168,8 +171,8 @@ export default function HomePage() {
               variant="secondary"
               onClick={() => {
                 setIsSaveModalOpen(false);
-                setTemplateName("");
-                setSaveError("");
+                setTemplateName('');
+                setSaveError('');
               }}
             >
               Cancel
@@ -193,10 +196,10 @@ export default function HomePage() {
               value={templateName}
               onChange={(e) => {
                 setTemplateName(e.target.value);
-                setSaveError("");
+                setSaveError('');
               }}
               onKeyDown={(e) => {
-                if (e.key === "Enter" && templateName.trim()) {
+                if (e.key === 'Enter' && templateName.trim()) {
                   confirmSaveTemplate();
                 }
               }}
@@ -213,12 +216,11 @@ export default function HomePage() {
               Prompt Preview
             </label>
             <div className="px-3 py-2 bg-muted rounded-lg text-sm text-muted-foreground max-h-32 overflow-y-auto">
-              {prompt || "No prompt entered"}
+              {prompt || 'No prompt entered'}
             </div>
           </div>
           <p className="text-sm text-muted-foreground">
-            Give your template a descriptive name so you can easily find it
-            later.
+            Give your template a descriptive name so you can easily find it later.
           </p>
         </div>
       </Modal>
