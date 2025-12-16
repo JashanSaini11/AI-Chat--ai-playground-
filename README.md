@@ -4,7 +4,7 @@ A modern, feature-rich AI playground built with Next.js, TypeScript, and Tailwin
 
 ## 🔗 Links
 
-- **Live Demo:** [Your Deployed URL Here]
+- **Live Demo:** https://jashan-ai-chat.vercel.app/
 - **Figma Design:** [https://www.figma.com/design/CF2qTXyHTz0Jn8GtpoumRR/AI-Chart](https://www.figma.com/design/CF2qTXyHTz0Jn8GtpoumRR/AI-Chart?node-id=0-1&t=G5jQppHp75AxoCHy-1)
 - **GitHub Repository:** https://github.com/JashanSaini11/AI-Chat--ai-playground-
 
@@ -332,29 +332,6 @@ Run `npm run storybook` to view component documentation with interactive example
 2. **Slider** (6 stories) - Temperature, max tokens, top-P, disabled, all parameters
 3. **Modal** (6 stories) - Basic, with footer, save template, sizes, scrollable
 4. **ChatBubble** (5 stories) - User/AI messages, long content, conversation, code blocks
-
----
-
-## Deployment
-
-### Vercel (Recommended)
-```bash
-npm i -g vercel
-vercel
-```
-
-### Netlify
-```bash
-npm run build
-netlify deploy --prod
-```
-
-### Environment Variables
-Add these if using real AI APIs:
-```
-OPENAI_API_KEY=your_key_here
-ANTHROPIC_API_KEY=your_key_here
-```
 
 ---
 
